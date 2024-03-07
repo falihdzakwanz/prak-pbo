@@ -16,9 +16,6 @@ class Game:
         def wrapper(self, *args):
             if self.__tries < 10:
                 return func(self, *args)
-            else:
-                print("Anda telah kehabisan kesempatan. Anda kalah.")
-                print(f"Angka yang saya pilih adalah {self.__number}.")
         return wrapper
 
     def start(self):
@@ -34,7 +31,11 @@ class Game:
                 continue
             
             self.check(guess)
-            if self.__tries == 10 or guess == self.__number:
+            if self.__tries >= 10 and guess != self.__number:
+                print("\nAnda telah kehabisan kesempatan. Anda kalah.")
+                print(f"Angka yang saya pilih adalah {self.__number}.")
+                break
+            elif guess == self.__number:
                 break
 
     @limit_tries
